@@ -25,8 +25,10 @@ const enhance = (connect) => {
             } else {
                 result = mapDispatch(dispatch, ownProps);
             }
-            mapStore && mapStore(dispatch, getState, ownProps);
-            return result;
+            return {
+                ...result,
+                ...mapStore(dispatch, getState, ownProps),
+            };
         }
         return connect(mapState, mapDispatch, ...params);
     }
